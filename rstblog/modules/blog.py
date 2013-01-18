@@ -72,7 +72,8 @@ def process_blog_entry(context):
             if rv is not None:
                 context.pub_date = datetime(*rv)
 
-    if context.pub_date is not None:
+    if context.pub_date is not None \
+            and context.source_filename.endswith('.rst'):
         context.builder.get_storage('blog') \
             .setdefault(context.pub_date.year, {}) \
             .setdefault(('0%d' % context.pub_date.month)[-2:], []) \
